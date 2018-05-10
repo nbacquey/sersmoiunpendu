@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "graphics.h"
 #include "networkIO.h"
 
 void testA(){

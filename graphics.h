@@ -1,7 +1,7 @@
 
 
-#ifndef GRAPHICS
-#define GRAPHICS
+#ifndef GRAPHICS_DEF
+#define GRAPHICS_DEF
 const char* GRAPHICS[] = {
 "\
                   \n\
