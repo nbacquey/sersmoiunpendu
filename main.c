@@ -2,15 +2,16 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "graphics.h"
+#include "networkIO.h"
 
 void testA(){
 
-	int num_step = 11 ; 
-	for (int step_idx = 0; step_idx < num_step; ++step_idx){
-		getchar();
-		system("clear");
-		printf("%s\n", GRAPHICS[step_idx]);
 
+	gallows* g = buildGallows ("mot");
+
+
+	while ( tryLetter(g, getNextCharLocal() ) != -1 ){  // 0 -> lettre bonne, 1 -> lettre pas bonne -> -1 jeu terminé
+		displayStateLocal();
 	}
 }
 
