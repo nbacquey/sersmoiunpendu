@@ -11,7 +11,7 @@ void testA(){
 
 
 	while ( tryLetter(g, getNextCharLocal() ) != -1 ){  // 0 -> lettre bonne, 1 -> lettre pas bonne -> -1 jeu terminé
-		displayStateLocal();
+		displayStateLocal(g);
 	}
 }
 
