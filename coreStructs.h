@@ -16,5 +16,6 @@ typedef struct  {
 #endif
 
 gallows* buildGallows(char* initWord);
+int tryLetter(gallows* g); //return 0 for right letter, 1 for wrong letter, -1 for game over
 
 char* gallowsToString(gallows* g);

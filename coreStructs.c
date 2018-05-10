@@ -24,6 +24,44 @@ gallows* buildGallows(char* initWord){
   return ret;
 }
 
+int tryLetter(gallows* g, char newC){
+  if(g->status != 0)
+    return -1;
+  
+  int i;
+  for(i = 0; i < strlen(g->wrongLetters); ++i)
+    if(newC == g->wrongLetters[i])
+      return 1;
+  
+  int isCharCorrect = 0;
+  int isWordCorrect = 1;
+  for(i = 0; i < g->wordSize; ++i){
+    if(g->fullWord[i] == newC){
+      isCharCorrect = 1;
+      g->currentWord[i] = newC;
+    }
+    if(g->currentWord[i] == '_')
+      isWordCorrect = 0;
+  }
+  
+  if(isWordCorrect){
+    g->status = 1;
+    return -1;
+  }
+  
+  if(isCharCorrect){
+    return 0;
+  }
+  
+  sprintf(g->wrongLetters,"%s%c",g->wrongLetters,newC);
+  if(++(g->currentStep) == NB_STEPS){
+    g->status = -1;
+    return -1;
+  }
+  
+  return 1
+}
+
 char* gallowsToString(gallows* g){
   char* ret = malloc(sizeof(char)*OUTPUT_SIZE);
   ret[0] = '\0';
