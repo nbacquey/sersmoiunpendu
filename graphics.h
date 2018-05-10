@@ -1,6 +1,7 @@
 
 
-
+#ifndef GRAPHICS
+#define GRAPHICS
 const char* GRAPHICS[] = {
 "\
                   \n\
@@ -160,3 +161,5 @@ const char* GRAPHICS[] = {
                   \n\
 "
 };
+
+#endif
