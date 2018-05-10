@@ -15,7 +15,10 @@ void testA(){
 }
 
 void testN(){
-  
+  while(1){
+    char c = getNextCharLocal();
+    printf("%c\n",c);
+  }
 }
 
 int main(int argc, char** argv){
