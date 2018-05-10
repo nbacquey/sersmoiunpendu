@@ -60,7 +60,7 @@ int tryLetter(gallows* g, char newC){
     return -1;
   }
   
-  return 1
+  return 1;
 }
 
 char* gallowsToString(gallows* g){
