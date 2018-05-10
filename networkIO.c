@@ -11,7 +11,7 @@ char getNextCharLocal(){
   do{
     ret = (char) getchar();
   }
-  while (ret >= 'A' && ret <= 'Z');
+  while (ret < 'A' || ret > 'Z');
   return ret;
 }
 

@@ -2,11 +2,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "networkIO.h"
+#include "gameplay.h"
 
 void testA(){
 
 
-	gallows* g = buildGallows ("mot");
+	gallows* g = buildGallows ("MOT");
 
 
 	while ( tryLetter(g, getNextCharLocal() ) != -1 ){  // 0 -> lettre bonne, 1 -> lettre pas bonne -> -1 jeu terminé
@@ -15,15 +16,12 @@ void testA(){
 }
 
 void testN(){
-  while(1){
-    char c = getNextCharLocal();
-    printf("%c\n",c);
-  }
+  game();
 }
 
 int main(int argc, char** argv){
   
-  testA();
+  //testA();
   
   testN();
   return 0;
