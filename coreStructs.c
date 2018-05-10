@@ -7,11 +7,11 @@
 gallows* buildGallows(char* initWord){
   gallows* ret = malloc(sizeof(gallows));
   
-  ret->currentStep = 0;
-  ret->wordSize = strlen(initWord);
-  ret->wrongLetters = malloc(sizeof(char)*MAXIMUM_WORD_SIZE);
-  ret->currentWord = malloc(sizeof(char)*(ret->wordSize+1));
-  ret->fullWord = initWord;
+  ret->currentStep = 0; // indice du graphic pendu
+  ret->wordSize = strlen(initWord); // taille du mot
+  ret->wrongLetters = malloc(sizeof(char)*MAXIMUM_WORD_SIZE); // vector de mauvaise lettre essayées par le jours
+  ret->currentWord = malloc(sizeof(char)*(ret->wordSize+1)); // etat du mot
+  ret->fullWord = initWord; // le mot a deviner
   
   int i;
   for(i = 0; i < ret->wordSize; ++i){
