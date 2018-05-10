@@ -10,7 +10,7 @@ typedef struct  {
   unsigned int wordSize;
   char* wrongLetters;
   char* currentWord;
-  char* fullWord
+  char* fullWord;
 } gallows;
 
 #endif

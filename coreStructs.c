@@ -1,10 +1,13 @@
-#include <strings.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
 #include "coreStructs.h"
 
 gallows* buildGallows(char* initWord){
   gallows* ret = malloc(sizeof(gallows));
   
-  ret->curentStep = 0;
+  ret->currentStep = 0;
   ret->wordSize = strlen(initWord);
   ret->wrongLetters = malloc(sizeof(char)*MAXIMUM_WORD_SIZE);
   ret->currentWord = malloc(sizeof(char)*(ret->wordSize+1));
