@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include "graphics.h"
 #include "coreStructs.h"
 
 gallows* buildGallows(char* initWord){
