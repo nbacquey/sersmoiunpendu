@@ -64,7 +64,26 @@ int tryLetter(gallows* g, char newC){
 }
 
 char* gallowsToString(gallows* g){
+  /*
+  Return the string associated to the game state.
+   gallow graphic
+    +  the current word
+    +  the list of wrong lettters that have been tried
+    +  the status
+  */
   char* ret = malloc(sizeof(char)*OUTPUT_SIZE);
-  ret[0] = '\0';
+
+  strcpy(ret, "\n");
+  strcat(ret, GRAPHICS[g -> currentStep]);
+  strcat(ret, "\n");
+  strcat(ret, g -> wrongLetters);
+  strcat(ret, "\n");
+  strcat(ret, g -> currentWord);
+  strcat(ret, "\n");
+  if (g-> status == 0) strcat(ret, "What is your next move ? ");
+  else if (g-> status == 1) strcat(ret,"gg");
+  else strcat(ret, "fail");
+  strcat(ret, '\0')
+
   return ret;
 }
