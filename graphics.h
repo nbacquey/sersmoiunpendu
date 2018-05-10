@@ -1,7 +1,7 @@
 
 
 
-char* graphics[] = {
+const char* GRAPHICS[] = {
 "\
                   \n\
                   \n\

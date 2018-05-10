@@ -9,7 +9,7 @@ void testA(){
 	for (int step_idx = 0; step_idx < num_step; ++step_idx){
 		getchar();
 		system("clear");
-		printf("%s\n", graphics[step_idx]);
+		printf("%s\n", GRAPHICS[step_idx]);
 
 	}
 }
