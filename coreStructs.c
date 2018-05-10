@@ -84,7 +84,6 @@ char* gallowsToString(gallows* g){
   if (g-> status == 0) strcat(ret, "What is your next move ? ");
   else if (g-> status == 1) strcat(ret,"gg");
   else strcat(ret, "fail");
-  strcat(ret, '\0')
 
   return ret;
 }
