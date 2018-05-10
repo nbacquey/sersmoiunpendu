@@ -12,6 +12,7 @@ gallows* buildGallows(char* initWord){
   ret->wrongLetters = malloc(sizeof(char)*MAXIMUM_WORD_SIZE); // vector de mauvaise lettre essayées par le jours
   ret->currentWord = malloc(sizeof(char)*(ret->wordSize+1)); // etat du mot
   ret->fullWord = initWord; // le mot a deviner
+  ret->status = 0; // 0 : en cours ; 1 : gagné ; -1 : perdu
   
   int i;
   for(i = 0; i < ret->wordSize; ++i){

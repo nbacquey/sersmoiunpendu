@@ -11,6 +11,7 @@ typedef struct  {
   char* wrongLetters;
   char* currentWord;
   char* fullWord;
+  int status;
 } gallows;
 
 #endif
