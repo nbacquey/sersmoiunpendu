@@ -248,4 +248,4 @@ char* gallowsToString(gallows* g){
   //else strcat(ret, "fail");
 
   return ret;
-}
+}//16:47

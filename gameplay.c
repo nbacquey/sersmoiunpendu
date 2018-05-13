@@ -4,8 +4,8 @@
 int game(){
   displayMessageLocal("Enter a word to guess (all caps)",0);
   char* newWord = getNewGameWordLocal();
-  
   gallows* g = buildGallows(newWord);
+  
   displayMessageLocal("New game started",1);
   while (g->status == 0){
     displayMessageLocal("Enter a character",1);
