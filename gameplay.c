@@ -1,7 +1,7 @@
 #include "networkIO.h"
 #include "gameplay.h"
 
-int game(){
+int gameLocal(){
   displayMessageLocal("Enter a word to guess (all caps)",0);
   char* newWord = getNewGameWordLocal();
   gallows* g = buildGallows(newWord);

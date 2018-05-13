@@ -1,2 +1,3 @@
 
-int game();
+int gameLocal();
+int gameNetwork();
