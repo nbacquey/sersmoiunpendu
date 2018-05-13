@@ -6,6 +6,8 @@
 
 void testA(){
 
+	int s = initClient(); 
+	printf("%d\n", s);
 
 	gallows* g = buildGallows ("MOT");
 
@@ -21,9 +23,9 @@ void testN(){
 
 int main(int argc, char** argv){
   
-  //testA();
+  testA();
   
-  testN();
+  //testN();
   return 0;
 }
 

@@ -10,3 +10,5 @@ char getNextCharLocal();
 
 void displayMessageLocal(char* message, int options);
 void displayStateLocal(gallows* state);
+
+int initClient(); 
