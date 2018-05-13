@@ -9,6 +9,8 @@ void testA(){
 	int s = initClient(); 
 	printf("%d\n", s);
 
+	sendNextCharToServer(s);
+
 	gallows* g = buildGallows ("MOT");
 
 

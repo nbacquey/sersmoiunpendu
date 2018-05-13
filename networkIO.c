@@ -24,6 +24,16 @@ char getNextCharLocal(){
   return ret;
 }
 
+void sendNextCharToServer(int socket){
+  char nc;
+  nc = getNextCharLocal();
+
+  while ( send( socket, &nc, 1, 0 ) != 1 ){}
+  // check that its return value is equal to the number of bytes you tried to send.
+  // In most cases this can be resolved by resending the unsent data.
+
+}
+
 void displayStateLocal(gallows* state){
   printf("%s\n",gallowsToString(state));
 }

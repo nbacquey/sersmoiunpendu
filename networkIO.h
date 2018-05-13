@@ -7,6 +7,7 @@
 char* getNewGameWordLocal();
 
 char getNextCharLocal();
+void sendNextCharToServer(int socket);
 
 void displayMessageLocal(char* message, int options);
 void displayStateLocal(gallows* state);
