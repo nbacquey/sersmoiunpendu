@@ -4,7 +4,6 @@
 char* getNewGameWordLocal(){
   char* ret = malloc(sizeof(char)*256);
   scanf("%s",ret);
-  ret[strlen(ret)-1] = '\0';
   return ret;
 }
 
