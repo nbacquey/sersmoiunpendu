@@ -19,15 +19,23 @@ void testA(){
 	}
 }
 
-void testN(){
-  game();
+void testN1(){
+  gameServer();
+}
+
+void testN2(){
+  gameClient();
 }
 
 int main(int argc, char** argv){
   
-  testA();
+  if(argc > 1)
+    testN2();
+  else
+    testN1();
   
-  //testN();
+  //testA();
+  
   return 0;
 }
 

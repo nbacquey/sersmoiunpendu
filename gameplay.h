@@ -1,3 +1,4 @@
 
 int gameLocal();
-int gameNetwork();
+int gameServer();
+int gameClient();

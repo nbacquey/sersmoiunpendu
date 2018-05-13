@@ -17,25 +17,25 @@
 #include <sys/time.h>
 #include <pthread.h>
 #include <signal.h>
+#include <fcntl.h>
 
 #define SERV_PORT_NUM 8484
 #define MAXIMUM_CLIENT_NUMBER 16
 
 
 int *clientSockets;
-struct sockaddr_in *clientAddresses;
+int servSocket;
+struct sockaddr *clientAddresses;
 int nbClients;
 
 pthread_t listenerThread;
 
-void initServer(){
+int initServer(){
   clientSockets = malloc(sizeof(int)*MAXIMUM_CLIENT_NUMBER);
-  clientAddresses = malloc(sizeof(struct sockaddr_in)*MAXIMUM_CLIENT_NUMBER);
+  clientAddresses = malloc(sizeof(struct sockaddr)*MAXIMUM_CLIENT_NUMBER);
   nbClients = 0;
   
-  struct sockaddr_in serv;
-  
-  int servSocket;
+  struct sockaddr_in serv;  
   
   memset(&serv, 0, sizeof(serv));
   serv.sin_family = AF_INET;                /* set the type of connection to TCP/IP */
@@ -44,14 +44,15 @@ void initServer(){
   
   servSocket = socket(AF_INET, SOCK_STREAM, 0);
   
-  bind(mysocket, (struct sockaddr *)&serv, sizeof(struct sockaddr));
-  listen(mysocket, 1);
+  bind(servSocket, (struct sockaddr *)&serv, sizeof(struct sockaddr));
+  listen(servSocket, 1);
   
   if(pthread_create(&listenerThread, NULL, acceptLoop, NULL) == -1) {
     perror("pthread_create");
     return EXIT_FAILURE;
   }
   
+  return 0;
 }
 
 void *acceptLoop(void *arg){
@@ -65,8 +66,9 @@ void *acceptLoop(void *arg){
     //sets socket to nonblocking reading mode
    int flags = fcntl(newSocket, F_GETFL, 0);
    flags |=  O_NONBLOCK;
-   fcntl(fd, F_SETFL, flags);
+   fcntl(newSocket, F_SETFL, flags);
    
+   printf("New client connected\n");
    ++nbClients;
   }
   
@@ -74,8 +76,9 @@ void *acceptLoop(void *arg){
   pthread_exit(NULL);
 }
 
-int closeServer(){
+void closeServer(){
   pthread_kill(listenerThread, SIGINT);
+  close(servSocket);
 }
 
 char* getNewGameWordLocal(){
@@ -111,14 +114,12 @@ char getNextCharServer(){
   
   smax = 0;
   for(i = 0; i < nbC; ++i){
-    int cSocket = clientSockets[i]
+    int cSocket = clientSockets[i];
     if(cSocket > smax)
       smax = cSocket;
     FD_SET(cSocket,&set);
   }
-  
   while(select(smax+1, &set, NULL, NULL, NULL) == 0);
-  
   int readSocket;
   for(i = 0; i < nbC; ++i){
     int cSocket = clientSockets[i];
@@ -127,10 +128,10 @@ char getNextCharServer(){
       break;
     }      
   }
-  
   char ret;
   recv(readSocket, &ret, 1, 0);
   
+  printf("Client number %d said %c !\n",readSocket, ret);
   return ret;
 }
 
@@ -202,6 +203,7 @@ void displayMessageNetwork(char* message, int options){
 void broadcastClients(char* message){
   int i;
   for(i = 0; i < nbClients; ++i){
+    printf("sending message to client %d\n",clientSockets[i]);
     send(clientSockets[i], message, strlen(message), 0);
   }
 }

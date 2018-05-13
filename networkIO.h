@@ -7,9 +7,19 @@
 char* getNewGameWordLocal();
 
 char getNextCharLocal();
-void sendNextCharToServer(int socket);
 
 void displayMessageLocal(char* message, int options);
 void displayStateLocal(gallows* state);
 
 int initClient(); 
+void sendNextCharToServer(int socket);
+
+int initServer();
+void closeServer();
+void *acceptLoop();
+
+char getNextCharServer();
+
+void displayStateNetwork(gallows* state);
+void displayMessageNetwork(char* message, int options);
+void broadcastClients(char* message);
