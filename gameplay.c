@@ -44,7 +44,7 @@ int gameServer(){
   displayMessageNetwork("Starting new game...",0);
   displayMessageNetwork("Starting new game...",1);
   while (g->status == 0){
-    displayMessageNetwork("Enter a character",0);
+    displayMessageNetwork("Enter a character",1);
     char c = getNextCharServer();
     
     char* answer;
@@ -60,17 +60,18 @@ int gameServer(){
         break;      
     }
     
-    displayMessageNetwork(answer,0);
-    displayMessageNetwork(gallowsToString(g),0);
+    displayMessageNetwork(answer,1);
+    displayMessageNetwork(gallowsToString(g),1);
   }
   
   char* endGame = (g->status == 1) ? "You Win !" : "You Lose !";
-  displayMessageNetwork(endGame,0);
+  displayMessageNetwork(endGame,1);
   return g->status;
 }
 
 int gameClient(){
   int clientSocket = initClient();
+  
   while(1){
     printf("Send a character to the server\n");
     sendNextCharToServer(clientSocket);

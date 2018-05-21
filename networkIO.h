@@ -12,6 +12,8 @@ void displayMessageLocal(char* message, int options);
 void displayStateLocal(gallows* state);
 
 int initClient(); 
+void *displayLoop(void *args);
+void displayResponse(int socket);
 void sendNextCharToServer(int socket);
 
 int initServer();

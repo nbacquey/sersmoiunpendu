@@ -149,49 +149,37 @@ void displayMessageLocal(char* message, int options){
 
 
 int initClient(){
-	// initialize client connection to the serveur throught TCP protocol
 
-	int mysocket ; 
-	struct sockaddr_in dest; // stores information about the machine we want to connect to.
+  int mysocket ; 
+  struct sockaddr_in dest; // stores information about the machine we want to connect to.
+  mysocket = socket(AF_INET, SOCK_STREAM, 0);
+  memset(&dest, 0, sizeof(dest)); // zero the struct 
+  dest.sin_family = AF_INET; // set the address family
+  dest.sin_addr.s_addr = inet_addr("127.0.0.1"); // set destination IP number - localhost, 127.0.0.1
+  dest.sin_port = htons(SERV_PORT_NUM); // set destination port number
+  connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr_in)); /*  make the connection and use it :*/	
 
-
-
-	/* Init socket */ 
-	// tells our OS that we want a file descriptor for a socket which we can use for a network stream connection :
-	mysocket = socket(AF_INET, SOCK_STREAM, 0);
-
-
-	/* Information about the machne we want to connect to */ 
-
-	// zero the struct :
-	memset(&dest, 0, sizeof(dest)); // zero the struct 
-
-	// set the address family
-	// should be the same value that was passed as the first parameter to socket(); 
-	// for most purposes AF_INET will serve.
-	dest.sin_family = AF_INET;
-	
-	// set destination IP number - localhost, 127.0.0.1
-	// dest.sin_addr.s_addr = integer stored in Big Endian format
-	// inet_addr() function will do the conversion from string into Big Endian integer for us
-	dest.sin_addr.s_addr = inet_addr("127.0.0.1"); 
-  //dest.sin_addr.s_addr = htonl(INADDR_LOOPBACK); 
-
-  // set destination port number
-  // for portability reasons htons() should always be used.
-  // htons() function converts the port number into a Big Endian short integer
-	dest.sin_port = htons(SERV_PORT_NUM);
-
-
-
-	/*  make the connection and use it :*/
-	// This tells our OS to use the socket mysocket to create a connection to the machine specified in dest.
-	connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr_in));
-	
-
-	return mysocket;
-
+  pthread_t displayThread;
+  int* socketRef = malloc(sizeof(int));
+  *socketRef = mysocket;
+  if(pthread_create(&displayThread, NULL, displayLoop, socketRef) == -1) {
+    perror("pthread_create");
+    return EXIT_FAILURE;
+  }
+  
+  return mysocket;
 }
+
+void *displayLoop(void *args){
+  int socket = *((int*)args);
+  
+  char buffer[256];
+  while(1){
+    while(recv(socket, buffer, 256, 0) == 0);
+    printf("%s", buffer);
+  }
+}
+
 
 void displayMessageNetwork(char* message, int options){
   if(options == 1)
